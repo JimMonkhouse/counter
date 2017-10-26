@@ -1,21 +1,50 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
 
 class Counter extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      value: 0
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+handleChange (event) {
+    if(event.target.innerHTML === '+'){
+      this.setState({
+        value: this.state.value + 1
+      });
+    }else{
+      if(this.state.value === 0){
+        return;
+      }
+      this.setState({
+        value: this.state.value - 1
+      });
+    }
+  }
+
+
+
+
   render () {
     return (
       <div className="counter">
-   		{this.props.text}
+        {this.props.title}
         {": "}
-        <span className="counter-value">0</span>
-        <button>+</button>
-        <button>-</button>
+        <span className="counter-value">{this.state.value}</span>
+        <button onClick={this.handleChange}>+</button>
+        <button onClick={this.handleChange}>-</button>
       </div>
     );
   }
 }
 
+
 ReactDOM.render(
-  <Counter text = "COUNTER"/>,
+  <Counter title = "BAT SHIT CRAZY"/>,
   document.getElementById('root')
 );
